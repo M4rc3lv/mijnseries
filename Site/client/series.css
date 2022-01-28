@@ -1,0 +1,289 @@
+﻿:root {
+ --bg: #141414;
+ --wit: #FFFFFF;
+ --gold: #cc9900;
+}
+
+@font-face {
+ font-family: netfucks;
+ src: url(debasneue.otf);
+}
+
+body,.w3-modal-content {
+ background-color: var(--bg);
+ color:var(--wit);
+}
+
+.main {
+ DEpadding-left:48px;
+ margin:0 auto;
+ width:1500px;
+}
+
+h2 {
+ color:red;
+ letter-spacing:2px;
+ font-size:40px;
+ font-family:netfucks;
+}
+
+h3 {
+ margin-top:0px;
+}
+
+.menu {
+ padding-top:20px;
+ padding-right:48px;
+}
+
+.menu a {
+ float:right;
+ font-weight:bold;
+ text-decoration:none;
+ margin-left:32px;
+}
+.no {text-decoration:none;}
+
+.kolom {
+ width:348px;
+}
+.lefttab {
+ margin-left:32px;
+}
+
+.lijst {
+ height: calc(100vh - 164px);
+ overflow:auto;
+ scrollbar-color: #9E0000 black;
+}
+
+.lijst:after {
+ content: "";
+ display: table;
+ clear: both;
+}
+
+.item {
+ width:320px;
+ height:180px;
+ max-height:180px;
+ margin-right:16px;
+ margin-bottom:16px;
+ position:relative;
+ font-size: 30px;
+ display: inline-block;
+ cursor:pointer;
+}
+
+.item img {
+ border-radius:4px;
+ position: absolute;
+ left: 0px;
+ top: 0px;
+ object-fit: cover;
+ width:320px;
+ height:180px;
+ z-index: -1;
+}
+
+.item p,h4 {
+ text-shadow: .1em .1em 2px #222;
+ margin:0;
+ padding:0;
+ padding-left:8px;
+ font-weight:bold;
+}
+p[data-soort] {
+ position:absolute;
+ bottom:4px;
+ font-size:0.4em;
+}
+p[data-titel] {
+ position:absolute;
+ font-size:0.6em;
+ bottom:20px;
+}
+
+.klein {
+ font-size:0.6em;
+}
+
+div.nfw_score{
+ font-size: 18px;
+ border-radius: 50%;
+
+ line-height: 36px;
+
+ width: 40px;
+ height: 40px;
+ text-align: center;
+ vertical-align: center;
+
+ background: rgba(100,100,100,0.7);
+ border: 2px solid #666;
+ color: #FF9;
+ font-weight: bold;
+ text-align: center;
+ z-index:1;
+ pointer-events: none;
+
+ position: absolute;
+ top:130px;
+ left:270px;
+}
+
+div.nfw_circle_red{
+ background: rgba(100,0,0,0.7);
+ border-color: #FF0000;
+}
+
+div.nfw_circle_green{
+ background: rgba(0,100,0,0.7);
+ border-color: #00FF00;
+}
+
+div.nfw_circle_yellow{
+ background: rgba(100,100,0,0.7);
+ border-color: #FFFF00;
+}
+
+div.nfw_circle_orange{
+ background: rgba(100,70,0,0.7);
+ border-color: #FF9900;
+}
+
+.w3-modal-content {
+ border-radius:4px;
+ height:80vh;
+}
+.detail {
+ border-radius:4px 4px 0 0;
+ width:100%;
+ height:40%;
+ object-fit: cover;
+}
+.txt {
+ background-color: var(--bg);
+ color:var(--wit);
+ border:none!important;
+ FFoutline: solid 1px var(--gold);
+ margin:0;
+ text-shadow: .1em .1em 2px #222;
+ display:inline-block;
+ width:100px;
+}
+select {
+ display:inline-block;
+
+}
+.txt1 {
+ background-color: var(--bg);
+ color:var(--wit);
+ border:none!important;
+ FFoutline: solid 1px var(--gold);
+ margin:0;
+ padding:0;
+ text-shadow: .1em .1em 2px #222;
+ font-weight:bold;
+ font-size:2em;
+}
+.txt1:focus,textarea:focus,.txt:focus{
+ FFoutline: solid 1px red!important;
+}
+select {
+ font-size:1.4em;
+ background-color: var(--bg);
+ color:var(--wit);
+ border:solid 1px grey;
+ FFoutline: solid 1px var(--gold);
+ appearance: none;
+}
+
+input[type=checkbox],#iPlaatje {
+ border:none!important;
+ FFoutline: solid 1px var(--gold);
+}
+
+button {
+ min-width:110px;
+}
+
+#btnEdit {
+ position:absolute;
+ z-index:10;
+ right:10px;top:calc(40% - 50px);
+}
+
+#txtOmschrijving {
+ border:none;
+ FFoutline: solid 1px var(--gold);
+ background-color: var(--bg);
+ color:var(--wit);
+ width:100%;
+ height:220px;
+}
+
+.footer {
+  position: fixed;
+  cursor:pointer;
+  bottom: 8px;
+  width: 100%;
+  color: silver;padding: 0.01em 16px;
+}
+.footer div {
+ float:left;
+ margin-right:32px;
+}
+
+.w3-button {
+ border-radius:4px;
+}
+
+.isfilm {
+ position: absolute;
+ top:-5px!important;
+ left:260px!important;
+
+ border-radius:none!important;
+ object-fit: fill!important;
+ width:60px!important;
+ height:60px!important;
+ z-index: 1!important;
+ filter:brightness(100%)!important;
+}
+.hidden {
+ display:none;
+}
+
+#fAfbeelding {
+ position:absolute;
+ top:260px;
+ left:16px;
+ text-shadow: .1em .1em 2px #222;
+ color:red;
+}
+
+
+.last {
+  animation: shake 2s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-2px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(4px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-8px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(8px, 0, 0);
+  }
+}
+
