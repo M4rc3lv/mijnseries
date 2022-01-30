@@ -152,6 +152,7 @@ $(function(){
  drag.on("drop",function(el, target, source, sibling){
   let idTarget=$(target).attr("id");
   let idSerie=$(el).attr("data-nr");
+  let Verhaal =$(el).attr("data-verhaal");
   if(idTarget.startsWith("lijst")) {
    let NieuweLocatie=idTarget.substr(5);
    console.log("Verplaats "+idSerie+" naar "+idTarget);
@@ -160,8 +161,11 @@ $(function(){
    // Zet alles in de dialoog en post het om te saven.
    $("#hVolgnummer").val(idSerie);
    $("#txtTitel").val( $('p[data-titel]',el).html() );
+   $("#txtOmschrijving").val( Verhaal );
    $("#sSoort").val( $('p[data-soort]',el).html() );
+   $("#sSoortFix").val( $('p[data-soort]',el).html() );
    $("#sPlaats").val( NieuweLocatie );
+   $("#sPlaatsFix").val( NieuweLocatie );
    $("#txtScore").val( $('div[data-score]',el).html() );
    $("#cFilm").val( !$("img.isfilm",el).hasClass("hidden") );
    $("#dlgForm").submit();
