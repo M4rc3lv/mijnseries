@@ -59,7 +59,7 @@
    <div class="w3-row">
 
     <div class="w3-col kolom">
-     <h3>Pindakaas-queue</h3>
+     <h3>Download-queue</h3>
      <div class="lijst" id="lijst1">
       <?php
        function Show($Locatie) {
@@ -154,6 +154,10 @@
       </div>
       <div class="w3-padding">
        <input type='hidden' id="hVolgnummer" name="hVolgnummer" value="-1" >
+
+      <input type='hidden' id="sSoortFix" name="sSoortFix" value="-1" >
+      <input type='hidden' id="sPlaatsFix" name="sPlaatsFix" value="-1" >
+
        <input type='text' class="w3-input txt1" id="txtTitel" name="txtTitel" value="Deep Shit (2019)" >
        <select id="sSoort" name="sSoort">
         <option value="Nederlands">Nederlands</option>
@@ -173,7 +177,8 @@
        Score: <input type='text' class="w3-input txt" id="txtScore" name="txtScore" value="0.0" >
        <input id='cFilm' name='cFilm' type="checkbox" value="true"> Is film
 
-       <textarea style="margin-top:16px;" id="txtOmschrijving" name="txtOmschrijving">Twee doorsnee vinexvrouwen, Sara en Veerle, besluiten de boel om te gooien: na een confronterende ontmoeting in de supermarkt beseffen ze hoe ze vastgeroest zitten in hun eigen saaie levens. Een spannend dubbelleven lijkt de oplossing te zijn, maar dat loopt al gauw uit de hand. Terwijl de vrouwen thuis de schijn op moeten houden, zakken ze steeds dieper weg in een onbedoeld crimineel avontuur. </textarea>
+       <textarea style="margin-top:16px;" id="txtOmschrijving" name="txtOmschrijving">
+       </textarea>
       </div>
 
 
