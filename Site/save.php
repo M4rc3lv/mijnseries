@@ -1,6 +1,8 @@
 <?php
  var_dump($_POST);
 
+ //die();
+
  $Db = json_decode(file_get_contents('Db/data.json'), true);
  if(!$Db) $Db=[];
  $ix=$_POST["hVolgnummer"]*1;
@@ -11,8 +13,8 @@
    "nr" => count($Db),
    "titel" => $_POST["txtTitel"],
    "verhaal"=> $_POST["txtOmschrijving"],
-   "subtitel" => $_POST["sSoort"],
-   "loc" => $_POST["sPlaats"],
+   "subtitel" => isset($_POST["sSoort"])?$_POST["sSoort"]:$_POST["sSoortFix"],
+   "loc" => isset($_POST["sPlaats"])? $_POST["sPlaats"] : $_POST["sPlaatsFix"],
    "score" => $_POST["txtScore"],
    "isfilm" => $_POST["cFilm"]
   ];
@@ -27,8 +29,8 @@
    "nr" => $ix,
    "titel" => $_POST["txtTitel"],
    "verhaal"=> $_POST["txtOmschrijving"],
-   "subtitel" => $_POST["sSoort"],
-   "loc" => $_POST["sPlaats"],
+   "subtitel" => isset($_POST["sSoort"])?$_POST["sSoort"]:$_POST["sSoortFix"],
+   "loc" => isset($_POST["sPlaats"])? $_POST["sPlaats"] : $_POST["sPlaatsFix"],
    "score" => $_POST["txtScore"],
    "isfilm" => $_POST["cFilm"]
   ];
