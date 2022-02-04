@@ -2,6 +2,7 @@
 // @name     TheTVDB Getter
 // @version  1
 // @include  https://thetvdb.com/series/*
+// @include  https://thetvdb.com/movies/*
 // @require  https://marcelv.net/client/jquery-3.5.1.min.js
 // @resource selectimg http://localhost:5057/favicon.png
 // @grant    GM.getValue
@@ -33,6 +34,10 @@ $(function(){
    let Titel = $("h1:first").text().trim();
    // Plak het jaartal er achter
    let Jaar = $("strong:contains('First Aired')").next("span").text().trim().substr(-4);
+   if(!Jaar) {
+    Jaar = $("strong:contains('Released')").next("span").text().trim().substr(-4);
+   }
+   console.log("Jaar=",Jaar);
    let Tekst = Titel+" ("+Jaar+")";
    navigator.clipboard.writeText(Tekst);
    $('#MVDone')[0].play(); 
