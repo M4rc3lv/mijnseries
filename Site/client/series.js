@@ -49,6 +49,8 @@ $(function(){
   $("#bOpslaan").hide();
   $("input[type=checkbox]").prop('disabled', "disabled");
   $("#btnEdit").show();
+
+  $(".filter").prop("readonly",false).prop("disabled",false);
  }
 
  function EditModus() {
@@ -142,6 +144,24 @@ $(function(){
    });
   }
  });
+
+ // Filters
+ $(".filter").click(function(){
+  DoFilter();// $(this).is(':checked') );
+ });
+
+ function DoFilter() {
+  $(".lijst > .item").show();
+  $(".lijst > .item").each(function(ix,val) {
+   if( !$("#Ffilms")[0].checked && $(this).attr("data-isfilm")) $(this).hide();
+   if( !$("#Fbuitenlands")[0].checked ) {
+    let Soort=$("p[data-soort]",$(this)).text();
+    if(Soort==="Comedy" || Soort==="Politieserie"  || Soort==="Spannend"  || Soort==="Drama")$(this).hide();
+   }
+
+
+  });
+ }
 
  // Drag drop
  let drag = dragula([document.querySelector('#lijst1'),
