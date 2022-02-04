@@ -46,14 +46,27 @@
   <div class="w3-container">
    <div class="main">
 
-   <div class="w3-row"><h2 class="w3-half"><a href="index.php" class='no'>Mijn series</a></h2>
-    <div class="w3-half menu">
-     <a href="#" id=sortscore title="Sorter op score"><img src="client/pix/sortster.png" class="w3-image" style='height:30px'/>&nbsp;Op score</a>
-     <a href="#" id=sortaz title="Sorteer op titel"><img src="client/pix/sortaz.png" class="w3-image" style='height:30px'/>&nbsp;Op titel</a>
-     <a href="#" id=nosort title="Sorteer op volgorde van binnenkomst"><img src="client/pix/nosort.png" class="w3-image" style='height:30px'/>&nbsp;Binnenkomst</a>
-     <a href="#" id=laatste title="Scroll naar laatste"><img src="client/pix/last.png" class="w3-image" style='height:30px'/>&nbsp;Laatste</a>
-     <a href="#" id="aNew" title='Nieuwe serie/film'><img src="client/pix/new.png" class="w3-image" style='height:30px'/>&nbsp;Nieuw</a>
+   <div class="w3-row"><h2 class="w3-third"><a href="index.php" class='no'>Mijn series</a></h2>
+    <div class="w3-twothird">
+     <div class="menu">
+      <a href="#" id=sortscore title="Sorter op score"><img src="client/pix/sortster.png" class="w3-image" style='height:30px'/>&nbsp;Op score</a>
+      <a href="#" id=sortaz title="Sorteer op titel"><img src="client/pix/sortaz.png" class="w3-image" style='height:30px'/>&nbsp;Op titel</a>
+      <a href="#" id=nosort title="Sorteer op volgorde van binnenkomst"><img src="client/pix/nosort.png" class="w3-image" style='height:30px'/>&nbsp;Binnenkomst</a>
+      <a href="#" id=laatste title="Scroll naar laatste"><img src="client/pix/last.png" class="w3-image" style='height:30px'/>&nbsp;Laatste</a>
+      <a href="#" id="aNew" title='Nieuwe serie/film'><img src="client/pix/new.png" class="w3-image" style='height:30px'/>&nbsp;Nieuw</a>
+     </div>
+
     </div>
+   </div>
+
+   <div class="filtermenu">
+    <div><input class='filter' id="Fbuitenlands" type="checkbox" checked>&nbsp;&nbsp;Buitenlands</div>
+    <div><input class='filter' id="Fdrama" type="checkbox" checked>&nbsp;&nbsp;Drama</div>
+    <div><input class='filter' id="Ffilms" type="checkbox" checked>&nbsp;&nbsp;Films</div>
+    <div><input class='filter' id="Fhogescore" type="checkbox" checked>&nbsp;&nbsp;Hoge score</div>
+    <div><input class='filter' id="Fnederlands" type="checkbox" checked>&nbsp;&nbsp;Nederlands</div>
+    <div><input class='filter' id="Fseries" type="checkbox" checked>&nbsp;&nbsp;Series</div>
+    <div><input class='filter' did="Fspannend" type="checkbox" checked>&nbsp;&nbsp;Spannend</div>
    </div>
 
    <div class="w3-row">
@@ -134,7 +147,8 @@
    <div id="Nemodownload">/home/marcel/DownloadPC</div>
    <div id="Series">Series</div>
    <div id="SeriesBig">Series Big</div>
-   <a href="https://thetvdb.com">thetvdb.com</a>
+   <a href="https://thetvdb.com" target="_blank">thetvdb.com</a>
+   <a href="https://imdb.com" target="_blank">imdb.com</a>
   </div>
   </div><!-- Main -->
 
@@ -158,7 +172,7 @@
       <input type='hidden' id="sSoortFix" name="sSoortFix" value="-1" >
       <input type='hidden' id="sPlaatsFix" name="sPlaatsFix" value="-1" >
 
-       <input type='text' class="w3-input txt1" id="txtTitel" name="txtTitel" value="Deep Shit (2019)" >
+       <input type='text' class="w3-input txt1" id="txtTitel" name="txtTitel" value="" >
        <select id="sSoort" name="sSoort">
         <option value="Nederlands">Nederlands</option>
         <option value="Nederlandse comedy-serie">Nederlandse comedy-serie</option>
@@ -166,6 +180,7 @@
         <option value="Comedy">Comedy</option>
         <option value="Politieserie">Politieserie</option>
         <option value="Spannend">Spannend</option>
+        <option value="Drama">Drama</option>
        </select>&nbsp;&nbsp;&nbsp;
 
        <select id="sPlaats" name="sPlaats" style="margin-top:16px;">
