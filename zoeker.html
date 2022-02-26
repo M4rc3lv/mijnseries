@@ -12,14 +12,26 @@
   </style>
  </head>
  <body>
+  <script>
+   function O(URL,naam) {
+    console.log("URL=",URL);
+    var W = window.open(URL, naam);
+   }
+  </script>
   <div class="w3-padding">
    <input id="z" type="text" class="w3-input" placeholder="Zoeken...">
   </div>
   <div class="w3-row">
-   <iframe id="tv" width=450 height=800 src="" class="w3-quarter"></iframe>
-   <iframe id="bol" width=450 height=800 src="" class="w3-quarter"></iframe>
-   <iframe id="imdb" width=450 height=800 src="" class="w3-quarter"></iframe>
-   <iframe id="mijn" width=450 height=800 src="" class="w3-quarter"></iframe>
+   <div class="w3-half">
+    <button onclick="O( $('#tv').prop('src') ,'TVDB')">Nieuw venster</button>
+   </div>
+   <div class="w3-half">
+    <button onclick="O( $('#imdb').prop('src') ,'TVDB')">Nieuw venster</button>
+   </div>
+  </div>
+  <div class="w3-row">
+   <iframe id="tv" src="" class="w3-half"></iframe>
+   <iframe id="imdb" src="" class="w3-half"></iframe>
   </div>
  </body>
 </html>

@@ -1,175 +1,152 @@
 $(function(){
- function Nemo1() {  $.ajax({url:"command.php?command=nemo1"}); }
- function Nemo2() {  $.ajax({url:"command.php?command=nemo2"}); }
- function Nemo3() {  $.ajax({url:"command.php?command=series"}); }
- function Nemo4() {  $.ajax({url:"command.php?command=seriesbig"}); }
- $("#Nemowebsite").click(Nemo1);
- $("#Nemodownload").click(Nemo2);
- $("#Series").click(Nemo3);
- $("#SeriesBig").click(Nemo4);
 
- ReadOnly();
-
- $("#aNew").click(function(){
-  $("#fAfbeelding").val("");
-  $("#iPlaatje").attr("src","");
-  $("#txtTitel").val("Nieuwe film/serie");
-  $("#sSoort").val("Nederlandse comedy-serie");
-  $("#sPlaats").val(1);
-  $("txtScore").val(0);
-  $("#txtOmschrijving").val("");
-  CmdHandler();
-  New();
+ $("#btnEdit").click(function(){
+  $("#dlgEdit").show();
  });
+
+//
+ //$(".hpimg").css("background-image","linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0)),url('../Db/s66.jpg')");
+ //$(".tekst").html("Vlaams. Tuur, Babs, Arne en Kato kennen elkaar niet en toch belandt in hun brievenbus een brief die de vier jongelui zal samenbrengen voor een groot avontuur. De brief nodigt hen uit voor een kamp in het openluchtmuseum en komt van Cara. Zij is een wat excentrieke kruidendame die grote waterkrachten bezit.");
 
  $(".item").click(function(){
-  let ix=$(this).attr("data-nr");
-  $("#hVolgnummer").val(ix);
-  $("#txtTitel").val($(this).children("p[data-titel]").html());
-  $("#iPlaatje").attr("src","Db/s"+ix+".jpg");
-  $("#sSoort").val($(this).children("p[data-soort]").text());
-  $("#txtScore").val($(this).children("div[data-score]").html());
-  $("#txtOmschrijving").val($(this).attr("data-verhaal"));
-  $("#sPlaats").val($(this).attr("data-plaats"));
-  if( $(this).attr("data-isfilm") )
-   {$("#cFilm").prop("checked",true); }
-  else
-   $("#cFilm").prop("checked",false);//removeProp("checked").removeAttr("checked");
-  ReadOnly();
-  Edit();
+  doClick($(this),false);
  });
 
- $("#btnEdit").click(EditModus);
+ function doClick(elem,inview) {
+  let ix=$(elem).attr("data-nr");
+  // UI
 
- function ReadOnly() {
-  $("input").prop('readonly', true).css("border","none").css("outline","none!important");
-  $("textarea").prop('readonly', true).css("border","none");
-  $("select").prop('disabled', "disabled").css("outline","none").css("border","none").css("appearance","none");
-  $("input[type=file]").hide();
-  $("#bOpslaan").hide();
-  $("input[type=checkbox]").prop('disabled', "disabled");
-  $("#btnEdit").show();
+  if(inview) $(elem)[0].scrollIntoView();
+  $(".item").removeClass("last");
+  $(elem).addClass("last");
 
-  $(".filter").prop("readonly",false).prop("disabled",false);
+  var TitelEnJaar=$(elem).children("p[data-titel]").text();
+  var Titel = TitelEnJaar.split(" (")[0];
+  var Jaar = TitelEnJaar.split(" (")[1].substr(0,4);
+  $("#dTitel").text(Titel);
+  $("#dScore").html($(elem).children("div[data-score]").text());
+  $("#dJaar").text(Jaar);
+  //$("#dImage").attr("src","Db/s"+ix+".jpg");
+  $(".hpimg").css("background-image","linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0)),url('../Db/s"+ix+".jpg')");
+  $("#dGenre").text($(elem).children("p[data-soort]").text());
+  $("#dTekst").html($(elem).attr("data-verhaal"));
+  $("#dIx").text(ix);
+  //alert($(this).attr("data-lang"));
+  if($(elem).attr("data-lang")==="NL") $("#spanNL").show(); else $("#spanNL").hide();
+  if($(elem).attr("data-lang")==="BE") $("#spanBE").show(); else $("#spanBE").hide();
+  if($(elem).attr("data-lang")==="DE") $("#spanDE").show(); else $("#spanDE").hide();
+  $("#nlsubs").hide();
+  $("#nosubs").hide();
+  if($(elem).attr("data-subs")==="nlsubs") $("#nlsubs").show(); else $("#nosubs").show();
+  $("#AantalSeizoenen").text($(elem).attr("data-seizoenen"));
+  if($(elem).attr("data-isfilm"))$("#isfilm").show();else $("#isfilm").hide();
+
+  document.cookie = "lastix="+ix+"; path=/; max-age=" + 30*24*60*60;
+
+  // Eeen paar dingen zijn niet zichtbaar: die zet ik in de dialoog elke keer
+  $("input:radio[name=locatie]").val([$(elem).attr("data-plaats")]);
+  $("#txtOmschrijving").val($(elem).attr("data-verhaal"));
+  $("input:radio[name=rLang]").val([$(elem).attr("data-lang")]);
+  $("input:radio[name=rSubs]").val([$(elem).attr("data-subs")]);
+  $("input:radio[name=rType]").val([$(elem).attr("data-isfilm")? 'true':'false']); // true of false
+
+  //$("#sFysiek").val([$(elem).attr("data-fysiek")]);
+  $("#sSoort").val([$("#dGenre").text()]);
  }
 
- function EditModus() {
-  $("input").prop('readonly', false).css("border","solid 1px grey");
-  $("textarea").prop('readonly', false).css("border","solid 1px grey");
-  $("select").prop('disabled', false).css("appearance","auto").css("border","solid 1px grey");
-  $("input[type=file]").show();
-  $("#bOpslaan").show();
-  $("input[type=checkbox]").prop('disabled', false);
-  $("#btnEdit").hide();
- }
+ // Zoek item met lastix en laad die in de GUI
+ var lastix=getCookie("lastix");
+ doClick($(".item[data-nr="+lastix+"]"),true);
 
+ $(".item").dblclick(function(){
+  $("#bEdit").click();
+ });
+
+ $("#bNew").click(New);
  function New() {
   $("#hVolgnummer").val(-1);
   $("#fAfbeelding").val("");
+  $("#iPlaatje").attr("src","");
+  $("input:radio[name=rLang]").val(["NL"]);
+  $("input:radio[name=rType]").val(["true"]);
+  $("#txtSeizoenen").val("");
+  $("input:radio[name=rSubs]").val(["nlsubs"]);
+  $("#txtScore").val("");
+  $("#txtTitel").val("");
+  $("#txtOmschrijving").val("");
+  $("#sSoort").val("");
   $("#dlgEdit").show();
-  EditModus();
  }
- function Edit() {
-  $("#fAfbeelding").val("");
+
+ $("#bEdit").click(function(){
+  let ix=$("#dIx").text();
+  $("#hVolgnummer").val(ix);
+  //alert(ix);
+  //Gebeurt hierboven al $("#locatie").val($(this).attr("data-plaats"));
+  $("#iPlaatje").attr("src","Db/s"+ix+".jpg");
+  $("#txtTitel").val($("#dTitel").text()+" ("+$("#dJaar").text()+")");
+  $("#txtScore").val($("#dScore").text());
   $("#dlgEdit").show();
- }
+ });
 
- $("#fAfbeelding").change(CmdHandler);
- $("#sPlaats").change(CmdHandler);
-
- function CmdHandler() {
-  $("#bOpslaan").show();
- }
-
- $("#bOpslaan").click(function() {
-  // Save!
-  $("#dlgEdit").hide();
+ $("#btnOK").click(function(){
+  document.cookie = "lastix="+$("#dIx").text()+"; path=/; max-age=" + 30*24*60*60;
+  $("form").submit();
  });
 
  $(document).keyup(function(ev) {
   if(ev.which==27) $("#dlgEdit").hide();
  });
 
- window.onclick = function(event) {
-  if (event.target == $("#dlgEdit")[0]) {
-   $("#dlgEdit").hide();
-  }
- }
-
- // Scroll naar laatst nieuw toegevoegd element
- const params = new URLSearchParams(window.location.search);
- const lastid = params.get("lastid");
- if(lastid) {
-  ScrollTo(lastid);
- }
-
- function ScrollTo(id) {
-  $("div[data-nr="+(id)+"]")[0].scrollIntoView();
-  $("div[data-nr="+(id)+"]").addClass("last");
- }
-
- function ScrollLast() {
-  $("div[data-nr="+(N-1)+"]")[0].scrollIntoView();
-  $("div[data-nr="+(N-1)+"]").addClass("last");
- }
- $("#laatste").click(ScrollLast);
-
- // Sorteren
- $("#sortaz").click(function(){
-  document.cookie = "sort=naam; path=/; max-age=" + 30*24*60*60;
-  location.href="index.php";
+ // Zoeken (filteren op titel)
+ $("#txtZoek").keyup(function(){
+  let Zoek=$(this).val().toLowerCase();
+  $(".lijst > .item").show();
+  if(Zoek.length==0) return;
+  console.log("Zoek=",Zoek);
+  $(".lijst > .item").each(function(ix,val) {
+   let titel=$("p[data-titel]",this).text().toLowerCase();
+   console.log(titel);
+   if(titel.indexOf(Zoek)<0) $(this).hide();
+  });
  });
 
- $("#sortscore").click(function(){
-  document.cookie = "sort=score; path=/; max-age=" + 30*24*60*60;
-  location.href="index.php";
- });
-
- $("#nosort").click(function() {
-  document.cookie = "sort=nosort; path=/; max-age=" + 30*24*60*60;
-  location.href="index.php";
- });
-
- // Scraper
- $("#txtOmschrijving").bind("paste", function(e){
-  console.log("Paste-functie geactiveerd 1");
-  var pastedData = e.originalEvent.clipboardData.getData('text');
-  if(pastedData.startsWith("https://thetvdb.com/")) {
-   console.log("Paste-functie geactiveerd 2 (thetvdb.com)");
-   $.ajax({url:"scrape.php?url="+encodeURIComponent(pastedData)}).done(function(data){
-    console.log(data);
-    $("#txtOmschrijving").val(data.split("###")[0]);
-    $("#txtScore").val(data.split("###")[1].replace(".",","));
-    $("#txtTitel").val(data.split("###")[2].trim() + " ("+ data.split("###")[3].trim() + ")");
+ // Filter op taal
+ $("#sFiltertaal").change(function(){
+  $("#sFiltergenre").val("1");
+  let val=$(this).val();
+  $(".lijst > .item").show();
+  if(val==="NL") {
+   $(".lijst > .item").each(function(ix,val) {
+    let lang=$(this).attr("data-lang");
+    if(lang!=="BE" && lang!=="NL")
+     $(this).hide();
    });
   }
  });
 
- // Filters
- $(".filter").click(function(){
-  DoFilter();// $(this).is(':checked') );
+ // Filter op genre
+ $("#sFiltergenre").change(function(){
+  $("#sFiltertaal").val("1");
+  let val=$(this).val();
+  $(".lijst > .item").show();
+  if(val==="1") return;
+  $(".lijst > .item").each(function(ix,v) {
+   let genre=$("p[data-soort]",$(this)).text();
+   console.log(genre+"L"+val);
+   if(genre!==val)
+    $(this).hide();
+  });
+
  });
 
- function DoFilter() {
-  $(".lijst > .item").show();
-  $(".lijst > .item").each(function(ix,val) {
-   if( !$("#Ffilms")[0].checked && $(this).attr("data-isfilm")) $(this).hide();
-   if( !$("#Fbuitenlands")[0].checked ) {
-    let Soort=$("p[data-soort]",$(this)).text();
-    if(Soort==="Comedy" || Soort==="Politieserie"  || Soort==="Spannend"  || Soort==="Drama")$(this).hide();
-   }
-
-
-  });
- }
-
- // Drag drop
+  // Drag drop
  let drag = dragula([document.querySelector('#lijst1'),
   document.querySelector('#lijst2'),
   document.querySelector('#lijst3'),
   document.querySelector('#lijst4')
  ]);
- drag.on("drop",function(el, target, source, sibling){
+ drag.on("drop",function(el, target, source, sibling){alert("TO DO!");return;
   let idTarget=$(target).attr("id");
   let idSerie=$(el).attr("data-nr");
   let Verhaal =$(el).attr("data-verhaal");
@@ -179,6 +156,7 @@ $(function(){
    $(target).attr("data-loc",NieuweLocatie);
 
    // Zet alles in de dialoog en post het om te saven.
+// TO DO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    $("#hVolgnummer").val(idSerie);
    $("#txtTitel").val( $('p[data-titel]',el).html() );
    $("#txtOmschrijving").val( Verhaal );
@@ -192,4 +170,22 @@ $(function(){
   }
  });
 
-});
+ // Sorteren
+ $("#sSorteren").val( getCookie("sort") );
+ $("#sSorteren").change(function(){
+  document.cookie = "sort="+$(this).val()+"; path=/; max-age=" + 30*24*60*60;
+  location.href="index.php";
+ });
+
+ function getCookie(cName) {
+  const name = cName + "=";
+  const cDecoded = decodeURIComponent(document.cookie); //to be careful
+  const cArr = cDecoded.split('; ');
+  let res;
+  cArr.forEach(val => {
+    if (val.indexOf(name) === 0) res = val.substring(name.length);
+  })
+  return res
+ }
+
+})

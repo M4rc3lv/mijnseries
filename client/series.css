@@ -1,6 +1,8 @@
 ﻿:root {
  --bg: #141414;
+ --zwart:#000000;
  --wit: #FFFFFF;
+ --grijs: #9999;
  --gold: #cc9900;
  --groen: #01F169;
 }
@@ -10,84 +12,96 @@
  src: url(debasneue.otf);
 }
 
+@font-face {font-family: drama; src:url('f/drama.woff2');}
+@font-face {font-family: highschool; src:url('f/highschool.woff2');}
+@font-face {font-family: historisch; src:url('f/historisch.woff2');}
+@font-face {font-family: sf; src:url('f/sf.woff2');}
+@font-face {font-family: komedie; src:url('f/komedie.woff2');}
+@font-face {font-family: politie; src:url('f/politie.woff2');}
+@font-face {font-family: spannend; src:url('f/spannend.woff2');}
+
 body,.w3-modal-content {
- background-color: var(--bg);
+ background-color: var(--zwart);
  color:var(--wit);
 }
 
-.main {
+.m {
+ width:1400px;
  margin:0 auto;
- width:1500px;
-}
-
-h2 {
- color:red;
- letter-spacing:2px;
- font-size:40px;
- font-family:netfucks;
 }
 
 h3 {
  margin-top:0px;
  color:var(--gold);
- font-size:1.4em;
+ font-size:1.8em;
  margin-bottom:0;
+ position:absolute;
+ font-family:netfucks;
+ padding-left:4px;
+ padding-top:1px;
+ text-shadow: 2px 0 0px #800040, 3px 2px 0px rgba(77,0,38,0.5), 3px 0 3px #FF002B, 5px 0 3px #800015, 6px 2px 3px rgba(77,0,13,0.5), 6px 0 9px #FF5500, 8px 0 9px #802A00, 9px 2px 9px rgba(77,25,0,0.5), 9px 0 18px #FFD500, 11px 0 18px #806A00, 12px 2px 18px rgba(77,66,0,0.5), 15px 2px 30px rgba(64,77,0,0.5), 17px 2px 45px rgba(38,77,0,0.5), 2px 2px 2px rgba(206,89,55,0);
+ z-index:10!important;
+ letter-spacing:1.5px;
 }
 
-.filtermenu {
- margin-bottom:32px;
-}
-.filtermenu div {
- float:left;
- margin-right:32px;
- color:var(--groen);
- font-weight:bold;
-}
-.filtermenu input[type=checkbox]{ transform:scale(1.5, 1.5);}
-
-.menu {
- padding-top:20px;
- padding-right:48px;
-}
-
-.menu a {
- float:right;
- font-weight:bold;
- text-decoration:none;
- margin-left:32px;
-}
-
-.no {text-decoration:none;}
-
-.kolom {
- width:348px;
-}
-.lefttab {
- margin-left:32px;
+.hpimg {
+ position:relative;
+ width:calc(100% - 16px);
+ height:30vh;
+ max-height:40vh;
+ background-size: cover;
+ background-repeat:no-repeat;
+ background-position: 20vw center;
 }
 
 .lijst {
- height: calc(100vh - 190px);
+ height: calc(70vh - 4px);
  overflow:auto;
  scrollbar-color: #9E0000 black;
 }
 
-.lijst:after {
- content: "";
- display: table;
- clear: both;
+:root {
+ --Colwidth:320px;
 }
-
-.item {
- width:320px;
- height:180px;
- max-height:180px;
+.w3-quarter {
+ width:calc(24.99999% - 16px);
  margin-right:16px;
+ padding:0;
+}
+.item {
+ width:var(--Colwidth);
+ height:184px;
+ max-height:184px;
  margin-bottom:16px;
  position:relative;
  font-size: 30px;
  display: inline-block;
  cursor:pointer;
+
+ border:solid 2px transparent;border-radius:4px;
+}
+
+.last {
+  Danimation: shake 2s cubic-bezier(.36,.07,.19,.97) both;
+  Dtransform: translate3d(0, 0, 0);
+  DDbackface-visibility: hidden;
+  Dperspective: 1000px;
+  border:solid 2px gold;
+}
+.isfilm {
+ position: absolute;
+ top:-5px!important;
+ left:260px!important;
+
+ border-radius:none!important;
+ object-fit: fill!important;
+ width:60px!important;
+ height:60px!important;
+ z-index: 1!important;
+ filter:brightness(100%)!important;
+}
+.hidden {
+ display:none;
 }
 
 .item img {
@@ -96,11 +110,15 @@ h3 {
  left: 0px;
  top: 0px;
  object-fit: cover;
- width:320px;
+ Dwidth:320px;
+ width:calc(var(--Colwidth) - 4px);
  height:180px;
  z-index: -1;
 }
 
+.kolpadding {
+
+}
 .item p,h4 {
  text-shadow: .1em .1em 2px #222;
  margin:0;
@@ -123,7 +141,68 @@ p[data-titel] {
  font-size:0.6em;
 }
 
-div.nfw_score{
+
+.form label {
+ min-width:120px;
+ display:inline-block;
+ margin-bottom:16px;
+}
+
+.txt {
+ outline:none;
+ background-color: var(--bg);
+ dcolor: var(--wit);
+ color: var(--gold);
+ border: solid 1px var(--groen);
+}
+
+
+h2 {
+ margin-top:0;
+ padding-top:16px;
+ letter-spacing:2px;
+ font-size:40px;
+ font-family:netfucks;
+}
+.hpimg span {margin-right:4px}
+.tekst {
+ width:30vw;
+ margin-top:8px;
+}
+.icon1 {
+ position:absolute;
+ top:calc(40vh - 10px);
+ right:10px;
+}
+
+#dTekst {
+ max-height:calc(20vh - 20px);
+ overflow:scroll;
+}
+
+.rood {color:red!important;}
+.groen {color:var(--groen);}
+.geel {color:var(--gold);}
+
+.iconbar {
+ position:absolute;
+ top:calc(30vh - 50px);
+ right:8px;
+ width:200px;
+}
+.iconbar button img {
+ height:32px;
+}
+.iconbar button {
+ float:right;
+ margin-right:16px;
+}
+.iconbar .knopp {
+ background:silver;
+ width:42px;
+}
+
+div.nfw_score, .scoreonder{
  font-size: 18px;
  border-radius: 50%;
 
@@ -147,6 +226,92 @@ div.nfw_score{
  left:270px;
 }
 
+.box {color:var(--gebrokenwit);border: solid 2px var(--grijs);border-radius:4px;
+ padding:0 4px 0 4px;
+ font-family:netfucks;
+ letter-spacing:1.5px;
+}
+.box img  {
+ height:calc(6px + 1em);
+}
+.icon {
+ height:calc(2px + 1em);
+}
+
+.box.nobor {
+ border:none!important;
+}
+.box.nobor img {
+ border: solid 2px var(--grijs);border-radius:4px;
+}
+.scoreonder {
+ position:static;
+ clear:all;
+ margin-top:8px;
+}
+#dIx{display:none;}
+#dlgEdit {
+ padding-top:9vh;
+ z-index:100;
+}
+.w3-modal {
+ background-color: rgba(0,0,0,0.8);
+}
+.w3-modal-content {
+ width:80vw;
+ height:calc(82vh - 32px);
+ border:solid 2px var(--grijs);
+}
+.previewpic {
+ width:640px;
+ height:360px;object-fit: cover;
+}
+.dialoogform input {
+}
+.dialoogform label {
+ margin-bottom:4px;
+ margin-top:8px;
+ display:block;
+ }
+.dialoogform .txt {
+ margin:1px;
+ width:calc(100% - 2px);
+ display:block;
+ margin-bottom:16px;
+ line-height:normal;
+ padding:2px;
+}
+.dialoogform textarea {
+ height:220px;
+}
+.dialoogform .MARGL16 {
+ margin-right:16px;
+ display:inline;
+}
+.formborder {
+ border: solid 1px var(--groen);
+ padding:2px;
+ padding-right:8px;
+ padding-left:8px;
+ margin-right:8px;
+}
+.serietxt {
+ background-color: var(--bg);
+ color: var(--gold);
+ outline: none;
+ border:none;
+ height:17px;
+ width:60px;
+ text-align:center;
+}
+.leftdial {
+ margin-top:16px;
+}
+.knop {
+ margin-top:16px;
+ min-width:160px;
+}
+
 div.nfw_circle_red{
  background: rgba(100,0,0,0.7);
  border-color: #FF0000;
@@ -166,139 +331,22 @@ div.nfw_circle_orange{
  background: rgba(100,70,0,0.7);
  border-color: #FF9900;
 }
-
-.w3-modal-content {
- border-radius:4px;
- height:80vh;
-}
-.detail {
- border-radius:4px 4px 0 0;
- width:100%;
- height:40%;
- object-fit: cover;
-}
-.txt {
- background-color: var(--bg);
- color:var(--wit);
- border:none!important;
- FFoutline: solid 1px var(--gold);
- margin:0;
- text-shadow: .1em .1em 2px #222;
- display:inline-block;
- width:100px;
-}
-select {
- display:inline-block;
-
-}
-.txt1 {
- background-color: var(--bg);
- color:var(--wit);
- border:none!important;
- FFoutline: solid 1px var(--gold);
- margin:0;
- padding:0;
- text-shadow: .1em .1em 2px #222;
- font-weight:bold;
- font-size:2em;
-}
-.txt1:focus,textarea:focus,.txt:focus{
- FFoutline: solid 1px red!important;
-}
-select {
- font-size:1.4em;
- background-color: var(--bg);
- color:var(--wit);
- border:solid 1px grey;
- FFoutline: solid 1px var(--gold);
- appearance: none;
-}
-
-input[type=checkbox],#iPlaatje {
- border:none!important;
- FFoutline: solid 1px var(--gold);
-}
-
-button {
- min-width:110px;
-}
-
-#btnEdit {
- position:absolute;
- z-index:10;
- right:10px;top:calc(40% - 50px);
-}
-
-#txtOmschrijving {
- border:none;
- FFoutline: solid 1px var(--gold);
- background-color: var(--bg);
- color:var(--wit);
- width:100%;
- height:220px;
-}
-
-.footer {
-  position: fixed;
-  cursor:pointer;
-  bottom: 8px;
-  width: 100%;
-  color: silver;padding: 0.01em 16px;
-}
-.footer div, .footer a {
- float:left;
- margin-right:32px;
-}
-
-.w3-button {
- border-radius:4px;
-}
-
-.isfilm {
- position: absolute;
- top:-5px!important;
- left:260px!important;
-
- border-radius:none!important;
- object-fit: fill!important;
- width:60px!important;
- height:60px!important;
- z-index: 1!important;
- filter:brightness(100%)!important;
-}
-.hidden {
- display:none;
-}
-
-#fAfbeelding {
- position:absolute;
- top:260px;
- left:16px;
- text-shadow: .1em .1em 2px #222;
- color:red;
+.w3-padding-left {
+ padding-left:16px;
 }
 
 
-.last {
-  animation: shake 2s cubic-bezier(.36,.07,.19,.97) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+.nopadL {
+ padding-left:0;
 }
-@keyframes shake {
-  10%, 90% {
-    transform: translate3d(-2px, 0, 0);
-  }
-  20%, 80% {
-    transform: translate3d(4px, 0, 0);
-  }
-
-  30%, 50%, 70% {
-    transform: translate3d(-8px, 0, 0);
-  }
-
-  40%, 60% {
-    transform: translate3d(8px, 0, 0);
-  }
+.knoponder1 {
+ position:fixed;
+ left:calc(50% - 100px - 80px);
+ bottom:calc(18vh);
+}
+.knoponder2 {
+ position:fixed;
+ left:calc(50% + 100px - 80px);
+ bottom:calc(18vh);
 }
 
